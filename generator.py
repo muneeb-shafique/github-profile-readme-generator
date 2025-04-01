@@ -3,6 +3,27 @@ import os
 def get_user_input(prompt):
     return input(prompt).strip()
 
+def format_markdown_links(links):
+    """
+    This function will automatically convert any link into markdown format.
+    Input: a comma-separated list of links.
+    Output: formatted markdown for each link.
+    """
+    markdown_links = ""
+    for link in links.split(','):
+        link = link.strip()
+        if "linkedin" in link.lower():
+            markdown_links += f"[LinkedIn]({link}) | "
+        elif "twitter" in link.lower():
+            markdown_links += f"[Twitter]({link}) | "
+        elif "github" in link.lower():
+            markdown_links += f"[GitHub]({link}) | "
+        elif "portfolio" in link.lower():
+            markdown_links += f"[Portfolio]({link}) | "
+        else:
+            markdown_links += f"[Website]({link}) | "
+    return markdown_links.rstrip(" | ")
+
 def generate_readme(data):
     template = f"""
 # {data['name']}'s GitHub Profile 🚀
@@ -75,13 +96,13 @@ def main():
         "github_username": get_user_input("Enter your GitHub username: "),
         "theme": get_user_input("Enter your preferred theme (default, radical, merko, dark, etc.): "),
         "banner_url": get_user_input("Enter the URL for your profile banner image (optional): "),
-        "pinned_repositories": get_user_input("Enter your pinned repositories (Markdown format, e.g., [repo1](https://github.com/repo1)): "),
+        "pinned_repositories": get_user_input("Enter your pinned repositories (e.g., Project1:https://github.com/username/project1, Project2:https://github.com/username/project2): "),
         "achievements": get_user_input("Enter your achievements (comma separated): "),
-        "projects": get_user_input("Enter your major projects (comma separated): "),
+        "projects": get_user_input("Enter your major projects (e.g., Project1:https://github.com/username/project1, Project2:https://github.com/username/project2): "),
         "quote": get_user_input("Enter a personal or motivational quote: "),
         "email": get_user_input("Enter your email: "),
         "portfolio": get_user_input("Enter your portfolio URL: "),
-        "social_links": get_user_input("Enter your social links (Markdown format): ")
+        "social_links": format_markdown_links(get_user_input("Enter your social media links (comma separated, e.g., https://linkedin.com/in/username, https://twitter.com/username): "))
     }
     
     readme_content = generate_readme(user_data)
