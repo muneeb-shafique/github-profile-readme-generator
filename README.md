@@ -21,7 +21,6 @@
             <li>Supports adding skills, technologies, and pinned projects.</li>
             <li>Allows users to add a custom motivational quote.</li>
             <li>Provides an option to add a profile banner image.</li>
-            <li>Easy-to-use command-line interface.</li>
         </ul>
     </section>
     
